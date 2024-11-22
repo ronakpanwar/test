@@ -4,7 +4,6 @@ import axios from 'axios';
 const ApiForm = () => {
     const [input, setInput] = useState({
         data:'',
-        file_b64:""
     }); 
 
     const [response, setResponse] = useState(null);
@@ -32,7 +31,7 @@ const ApiForm = () => {
           
             const res = await axios.post('https://test-ecru-three-32.vercel.app/bfhl', {input}, {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
+                    'Content-Type': 'application/json',
                 },
             });
             setResponse(res.data);

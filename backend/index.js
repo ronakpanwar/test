@@ -9,7 +9,7 @@ const app = express();
 
 app.use(express.json());
 const  corsOptions  = {
-    origin:"https://test-w5hz-4hcfmttmv-ronak-panwars-projects.vercel.app/",
+    origin:"https://test-w5hz.vercel.app",
       methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials:true
 }
