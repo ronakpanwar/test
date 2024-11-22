@@ -8,6 +8,11 @@ const PORT = 8000;
 const app = express();
 
 app.use(express.json());
+const  corsOptions  = {
+    origin:"https://test-w5hz-4hcfmttmv-ronak-panwars-projects.vercel.app/",
+      methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials:true
+}
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.urlencoded({extended:true}));

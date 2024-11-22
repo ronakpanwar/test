@@ -2,30 +2,35 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const ApiForm = () => {
-    const [input, setInput] = useState(''); 
-const [file, setFile] = useState(null); 
+    const [input, setInput] = useState({
+        data:'',
+        file_b64:""
+    }); 
+
     const [response, setResponse] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
-
+    const handleChange = (e) => {
+        setInput({
+          ...input,
+          [e.target.name]: e.target.value,
+        });
+      };
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
         setLoading(true);
         setResponse(null);
 
-        const formData = new FormData();
+       
 
         try {
           
             const parsedInput = JSON.parse(input);
             formData.append('data', JSON.stringify(parsedInput));
-            if (file) {
-                formData.append('file', file);
-            }
-
+            
           
-            const res = await axios.post('http://localhost:8000/bfhl', formData, {
+            const res = await axios.post('https://test-ecru-three-32.vercel.app/bfhl', {input}, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -45,8 +50,9 @@ const [file, setFile] = useState(null);
                 <textarea
                     rows="5"
                     placeholder='Enter JSON: {"data": ["A", "2", "c"]}'
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
+                    name='data'
+                    value={input.data}
+                    onChange={handleChange}
                     style={{
                         width: '100%',
                         padding: '10px',
@@ -57,8 +63,8 @@ const [file, setFile] = useState(null);
                     }}
                 />
                 <input
-                    type="file"
-                    onChange={(e) => setFile(e.target.files[0])}
+                    type="text"
+                    onChange={(e) }
                     style={{
                         display: 'block',
                         marginBottom: '10px',

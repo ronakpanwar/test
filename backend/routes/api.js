@@ -9,7 +9,7 @@ router.post('/',  async (req, res) => {
         if (!data) {
             return res.status(400).json({ is_success: false, message: 'Data is required.' });
         }
-      
+        
         const response = processInput(data, file_b64);
         res.status(200).json(response);
     } catch (err) {
