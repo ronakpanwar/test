@@ -5,7 +5,9 @@ const isPrime = (num) => {
     }
     return true;
 };
-const processInput = (data, file_b64) => {
+
+const processInput = (data, file) => {
+    // Extract numbers and alphabets from the input data
     const numbers = data.filter((item) => !isNaN(item));
     const alphabets = data.filter((item) => isNaN(item));
     const highestLowercaseAlphabet = alphabets
@@ -13,13 +15,26 @@ const processInput = (data, file_b64) => {
         .sort()
         .pop();
 
-    const primeExists = numbers.some((num) => isPrime(parseInt(num)));
+    // Check if there is a prime number in the input
+    const primeExists = numbers.some((num) => isPrime(parseInt(num, 10)));
 
- 
-    const fileValid = !!file_b64;
-    const fileMimeType = file_b64 ? 'application/pdf' : null;
-    const fileSizeKb = file_b64 ? 400 : null;
+    // File processing (assume file is provided as Base64 with metadata)
+    let fileValid = false;
+    let fileMimeType = null;
+    let fileSizeKb = 0;
 
+    if (file) {
+        try {
+            const fileBuffer = Buffer.from(file.content, 'base64');
+            fileSizeKb = fileBuffer.length / 1024;
+            fileMimeType = file.mimeType;
+            fileValid = true;
+        } catch (err) {
+            fileValid = false;
+        }
+    }
+
+    // Return the response object
     return {
         is_success: true,
         user_id: 'Ronak_Panwar_20112001',
