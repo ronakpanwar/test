@@ -1,19 +1,16 @@
 const express = require('express');
 const { processInput } = require('../controller/apiController');
 const router = express.Router();
-const multer = require('multer');
 
-const upload = multer({ dest: 'uploads/' });
-router.post('/', upload.single('file'), async (req, res) => {
+router.post('/',  async (req, res) => {
     try {
-        const { data} = req.body;
+        const { data , file_b64} = req.body;
 
         if (!data) {
             return res.status(400).json({ is_success: false, message: 'Data is required.' });
         }
-        const file= req.file
       
-        const response = processInput(data, file);
+        const response = processInput(data, file_b64);
         res.status(200).json(response);
     } catch (err) {
         res.status(500).json({ is_success: false, message: 'Internal Server Error.' });
