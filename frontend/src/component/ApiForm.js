@@ -62,14 +62,7 @@ const ApiForm = () => {
                         marginBottom: '10px',
                     }}
                 />
-                <input
-                    type="text"
-                    onChange={(e) }
-                    style={{
-                        display: 'block',
-                        marginBottom: '10px',
-                    }}
-                />
+                
                 <button
                     type="submit"
                     style={{
