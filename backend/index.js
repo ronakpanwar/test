@@ -17,6 +17,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.urlencoded({extended:true}));
 app.use('/bfhl', apiRoutes);
+app.get("/" , (req,res)=>{
+  res.json('Hello') } );
 
 app.listen( PORT , ()=>{
     console.log("Server start on 8000");
